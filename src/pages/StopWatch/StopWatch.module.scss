@@ -1,0 +1,87 @@
+@import "../../designSystem/library";
+
+.stopwatch-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  margin-bottom: 1rem;
+  font-family: $font-primary;
+
+  .stopwatch-container-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+
+    .stopwatch-container {
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      color: white;
+      // border: 1px solid green;
+      flex: 1;
+      font-size: 66px;
+      font-weight: 300;
+      padding-bottom: 3rem;
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        width: fit-content;
+        span {
+          margin: 0rem 0.1rem;
+        }
+      }
+    }
+
+    .stopwatch-btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      // border: 1px solid green;
+      flex: 0.5;
+      padding: 0rem 4rem;
+      color: white;
+    }
+
+    .separator {
+      width: 80%;
+      height: 1px;
+      background-color: rgb(69, 69, 69);
+      margin: auto;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .stopwatch-lap-container {
+      flex: 1.5;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+
+      .lap-container-element {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0rem 3rem;
+        margin-top: 0.5rem;
+
+        .lap-container-element-value {
+          display: flex;
+        }
+      }
+      .ele-separator {
+        width: 80%;
+        height: 1px;
+        background-color: rgb(69, 69, 69);
+        margin: 0.6rem auto;
+        flex-shrink: 0;
+      }
+    }
+  }
+}

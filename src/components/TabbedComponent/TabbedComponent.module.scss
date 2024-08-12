@@ -1,0 +1,44 @@
+@import "../../designSystem/library";
+
+.tabbed-component {
+  display: flex;
+  align-items: center;
+  color: $primary-light;
+  font-family: $font-primary;
+  height: 60px;
+
+  .tab-element-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    cursor: pointer;
+
+    .tab-text-container {
+      font-size: 10px;
+      letter-spacing: 1px;
+      margin-top: 0.1rem;
+    }
+  }
+
+  .tab-separator {
+    height: 60%;
+    width: 1px;
+    background-color: $primary-light;
+  }
+
+  .tab-element-container-active {
+    .tab-svg-container {
+      svg {
+        path {
+          fill: $primary-active;
+        }
+      }
+    }
+
+    .tab-text-container {
+      color: $primary-active;
+    }
+  }
+}
