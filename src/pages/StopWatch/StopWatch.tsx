@@ -15,6 +15,8 @@ const StopWatch = () => {
   const [accumulatedLapTime, setAccumulatedLapTime] = useState(0);
   const [activeLap, setActiveLap] = useState(1);
   const [lapArr, setLapArr] = useState<any>([]);
+  const [redIndex, setRedIndex] = useState(null);
+  const [greenIndex, setGreenIndex] = useState(null);
 
   const intervalRef = useRef<any>(null);
   const startTimeRef = useRef<number | null>(null);
@@ -98,6 +100,8 @@ const StopWatch = () => {
     setActiveLap(1);
     setTime({ minutes: 0, seconds: 0, milliseconds: 0 });
     setLapTime({ minutes: 0, seconds: 0, milliseconds: 0 });
+    setGreenIndex(null);
+    setRedIndex(null);
   };
 
   const lapClickHandler = () => {
@@ -127,6 +131,26 @@ const StopWatch = () => {
         return el;
       }
     });
+
+    if (tempLapArr.length > 1) {
+      let convertedArr = tempLapArr.map((el: any) => {
+        return {
+          lapId: el.lapId,
+          milliSeconds:
+            el.milliSeconds + el.seconds * 1000 + el.minutes * 60 * 1000,
+        };
+      });
+
+      let greenIndexVal = [...convertedArr].sort(
+        (a: any, b: any) => a.milliSeconds - b.milliSeconds
+      )[0].lapId;
+      let redIndexVal = [...convertedArr].sort(
+        (a: any, b: any) => b.milliSeconds - a.milliSeconds
+      )[0].lapId;
+
+      setGreenIndex(greenIndexVal);
+      setRedIndex(redIndexVal);
+    }
 
     tempLapArr = [
       {
@@ -196,11 +220,29 @@ const StopWatch = () => {
             return (
               <>
                 <div className={classes["lap-container-element"]}>
-                  <div className={classes["lap-container-element-text"]}>
+                  <div
+                    className={classes["lap-container-element-text"]}
+                    style={
+                      greenIndex === lap.lapId
+                        ? { color: "rgb(0, 188, 0)" }
+                        : redIndex === lap.lapId
+                        ? { color: "rgb(255,0,0)" }
+                        : {}
+                    }
+                  >
                     {lap.lap}
                   </div>
                   {activeLap === lap.lapId ? (
-                    <div className={classes["lap-container-element-value"]}>
+                    <div
+                      className={classes["lap-container-element-value"]}
+                      style={
+                        greenIndex === lap.lapId
+                          ? { color: "rgb(0, 188, 0)" }
+                          : redIndex === lap.lapId
+                          ? { color: "rgb(255,0,0)" }
+                          : {}
+                      }
+                    >
                       <div>{formatTime(lapTime.minutes, 2)}</div>:
                       <div>{formatTime(lapTime.seconds, 2)}</div>
                       <span>.</span>
